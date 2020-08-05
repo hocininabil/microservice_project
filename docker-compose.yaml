@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  ue-mysql:
+    container_name: ue-mysql
+    build:
+      context: .
+      dockerfile: Dockerfile-mysql
+    restart: always
+
+  ue-app:
+    container_name: ue-app
+    build:
+      context: .
+      dockerfile: Dockerfile-app
+    depends_on:
+      - ue-mysql
+    ports:
+      - "8181:8181"
+    restart: always
+    
+    
